@@ -5,9 +5,6 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-
-    <div className="bg-fuchsia-900"> 
-      <div className="bg-white">
           <div className="flex h-screen items-center justify-center">
         {/* Logo Container */}
         <div className="relative w-[250px] h-[274px] flex items-center justify-center">
@@ -43,8 +40,6 @@ export default function Home() {
             />
         </div>
       </div>
-      </div>
-    </div>
     
     
        

@@ -50,7 +50,7 @@ export default function page() {
         const data = {name: name,uid:user.uid,age: age,Phone: phone,address: address,Disability: selectedDisability,conditions: medicalCondition,medications: meds}
         console.log(data)
         const collectionName="user-profile-details";
-        createData(collectionName,data);
+        createData(collectionName,data, user.uid);
     }
 
     return (
