@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 export default function Home() {
     const { user } = UserAuth() || {};
+    const phoneNumber = "+919037714678"; // Change this to the desired number
     const [heartData, setheartData] = useState([
         {
           color: "steelblue",
@@ -81,8 +82,18 @@ export default function Home() {
               </div>
             </Link>
           </div>
-            
+
+          <div className="flex justify-center items-center h-screen bg-gray-100">
+            <a
+              href={`tel:${phoneNumber}`}
+              className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-blue-600 transition"
+            >
+              📞 Call Now
+            </a>
+          </div>
         </div>
+
+
     </div>
   )
 }
