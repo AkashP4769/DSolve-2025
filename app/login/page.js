@@ -22,7 +22,7 @@ export default function Login() {
   return (
     <div className="flex flex-col shadow-purple-600 shadow-2xl bg-fuchsia-900 p-6 rounded-lg w-96
      h-100 justify-center">
-      <h1 className="text-white text-center">Login</h1>
+      <h1 className="text-white text-center text-2xl font-semibold">Login</h1>
       <label className="text-white">Email:</label>
       <input
         type="email"
@@ -43,7 +43,7 @@ export default function Login() {
       />
       <div className="flex justify-center mt-4">
         <button
-          className="p-2 rounded-lg hover:bg-red-300 transition-colors w-20 text-white bg-blue-500"
+          className="p-2 rounded-lg hover:bg-purple-500 transition-colors w-20 text-white bg-purple-400"
           onClick={handleLogin}
         >
           Login

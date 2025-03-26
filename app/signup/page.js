@@ -22,7 +22,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex flex-col bg-blue-950 p-6 rounded-lg w-96 h-100 justify-center">
+    <div className="flex flex-col bg-fuchsia-900 p-6 rounded-lg w-96 h-100 justify-center">
       <h1 className="text-white text-center">SignUp</h1>
       <label className="text-white">Name:</label>
       <input
@@ -53,14 +53,16 @@ export default function Signup() {
       />
       <div className="flex justify-center mt-4">
         <button
-          className="p-2 rounded-lg hover:bg-red-300 transition-colors w-20 text-white bg-blue-500"
+          className="p-2 rounded-lg hover:bg-purple-400 transition-colors w-20 duration-300 text-white bg-purple-500"
           onClick={handleSignUp}
         >
           SignUp
         </button>
       </div>
-      <p className="text-white">Already have an account?</p>
-      <Link href="/login" className="text-white">Login</Link>
+      <div className="flex justify-evenly py-4">
+        <p className="text-white">Already have an account?</p>
+        <Link href="/login" className="text-white">Login</Link>
+      </div>
               
     </div>
 

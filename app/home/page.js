@@ -53,14 +53,13 @@ export default function Home() {
       }, []);
 
       console.log(user?.name);
-      
+
   console.log(heartData.points);
   return (
     
     <div className='flex flex-col h-[100vh] text-black'>
         <div className='mt-[8vh] h-[92vh] flex flex-col rounded-t-xl justify-center items-center'>
             <h2 className='text-black'>Real-Time Health Monitoring</h2>
-            <h1 className='text-black'>My First LineChart</h1>
             <div className='flex flex-col sm:flex-row justify-center items-center'>
                 <div className='flex flex-col justify-center items-center'>
                     <LineChart id="heartRate" 
@@ -95,7 +94,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="flex justify-center items-center h-screen bg-gray-100">
+          <div className="flex justify-center items-center bg-gray-100">
             <a href={`tel:${phoneNumber}`}
               className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-blue-600 transition">
               📞 Call Now
