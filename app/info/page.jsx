@@ -1,12 +1,19 @@
 "use client";
 import React from 'react'
 import { useState } from 'react'
+import { createData } from '../functions/crud';
+import { UserAuth } from '../context/AuthContextProvider';
 //inport poppins font
 
 
 export default function page() {
+    const { user } = UserAuth() || {};
     const [page, setPage] = useState(2);
     const [selectedDisability, setSelectedDisability] = useState("");
+    const [name,setName] = useState('');
+    const [age,setAge] = useState('');
+    const [phone,setPhone] = useState('');
+    const [address,setAddress] = useState('');
     
     const [medicalCondition, setMedicalCondition] = useState([]);
     const [meds, setMeds] = useState([]);
@@ -37,8 +44,13 @@ export default function page() {
         setPage(page - 1);
     }
 
-    const handleConfirm = () => {
+    const handleConfirm = (e) => {
         console.log('confirm')
+        e.preventDefault();
+        const data = {name: name,uid:user.uid,age: age,Phone: phone,address: address,Disability: selectedDisability,conditions: medicalCondition,medications: meds}
+        console.log(data)
+        const collectionName="user-profile-details";
+        createData(collectionName,data);
     }
 
     return (
@@ -50,16 +62,16 @@ export default function page() {
                     </div>
                     <div className='flex flex-col items-start ml-6 '>
                         <label className=''>Name</label>
-                        <input type='text' className='w-[90vw] py-2 mb-2 rounded-md bg-white my-2 text-gray-900 px-2'/>
+                        <input type='text' onChange={(e)=>setName(e.target.value)} className='w-[90vw] py-2 mb-2 rounded-md bg-white my-2 text-gray-900 px-2'/>
                     
                         <label className=''>Age</label>
-                        <input type='text' className='w-[90vw] py-2 mb-2 rounded-md bg-white mt-2 text-gray-900 px-2'/>
+                        <input type='text' onChange={(e)=>setAge(e.target.value)} className='w-[90vw] py-2 mb-2 rounded-md bg-white mt-2 text-gray-900 px-2'/>
                     
                         <label className=''>Phone Number</label>
-                        <input type='text' className='w-[90vw] py-2 mb-2 rounded-md bg-white mt-2 text-gray-900 px-2'/>
+                        <input type='text' onChange={(e)=>setPhone(e.target.value)} className='w-[90vw] py-2 mb-2 rounded-md bg-white mt-2 text-gray-900 px-2'/>
                     
                         <label className=''>Address</label>
-                        <input type='text' className='w-[90vw] py-2 mb-2 rounded-md bg-white mt-2 text-gray-900 px-2'/>
+                        <input type='text' onChange={(e)=>setAddress(e.target.value)} className='w-[90vw] py-2 mb-2 rounded-md bg-white mt-2 text-gray-900 px-2'/>
                     </div>
                     
                     <div className='flex flex-col justify-center items-end'>
