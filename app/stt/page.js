@@ -27,7 +27,7 @@ export default function speech_to_text() {
       };
     
   return (
-    <div>
+    <div className='bg-white text-black'>
       <h2>Speech to Text</h2>
       <button onClick={startRecognition}>Start Speaking</button>
       <p>{text}</p>

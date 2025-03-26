@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import 'dotenv/config';
-import CORS from 'cors';
 
 export default function get_location() {
   const [location, setLocation] = useState(null);
@@ -20,42 +19,40 @@ export default function get_location() {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        getLocation(position.coords.latitude, position.coords.longitude);
+        getNearbyHospitals(position.coords.latitude, position.coords.longitude).then((hospitals) => {
+            setHospitals(hospitals);
+        });
       },
       (error) => setError(error.message)
     );
   };
 
   async function getNearbyHospitals(lat, lng) {
-      const API_KEY = process.env.NEXT_PUBLIC_GMAPS_API;
-      const radius = 5000; // Search radius in meters (5km)
-      const type = "hospital";
-      console.log(API_KEY);
-
-      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&key=${API_KEY}`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (data.results) {
-            return data.results.map(hospital => ({
-                name: hospital.name,
-                address: hospital.vicinity,
-                rating: hospital.rating || "No rating",
-                location: hospital.geometry.location
-            }));
-        } else {
-            console.log("No hospitals found.");
-            return [];
-        }
+    try {
+      const response = await fetch(`/api/getHospitals?lat=${lat}&lng=${lng}`);
+      const data = (await response.json()).hospitals;
+      console.log(data);    
+  
+      if (data.length) {
+        return data.map((hospital) => ({
+          name: hospital.name,
+          address: hospital.vicinity,
+          rating: hospital.rating || "No rating",
+          location: hospital.location,
+        }));
+      } else {
+        console.log("No hospitals found.");
+        return [];
+      }
     } catch (error) {
-        console.error("Error fetching hospitals:", error);
+      console.error("Error fetching hospitals:", error);
+      return [];
     }
   }
+  
 
   return (
-    <div className="text-black">
+    <div className="text-black bg-white">
       <h2>Get Current Location</h2>
       <button onClick={getLocation}>Find My Location</button>
       {location && <p>Latitude: {location.lat}, Longitude: {location.lng}</p>}
