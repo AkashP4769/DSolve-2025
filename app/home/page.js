@@ -52,20 +52,21 @@ export default function Home() {
   return (
     <div className='flex flex-col h-[100vh]'>
         <div className='mt-[8vh] h-[92vh] rounded-t-xl justify-center items-center'>
-            <h2>Real-Time Health Monitoring</h2>
-            <h1>My First LineChart</h1>
+            <h2 className='text-black'>Real-Time Health Monitoring</h2>
+            <h1 className='text-black'>My First LineChart</h1>
             <div className='flex justify-center items-center'>
                 <div>
-                    <label>HeartRate</label>
-                    <LineChart 
+                    <label className='text-black'>HeartRate</label>
+                    <LineChart id="heartRate" 
                         width={300}
                         height={150}
                         data={heartData}
                     />
                 </div>
                 <div>
-                    <label>Oxygen Level</label>
+                    <label className='text-black'>Oxygen Level</label>
                     <LineChart 
+                        id="oxygenLevel"
                         width={300}
                         height={150}
                         data={oxygenData}
@@ -75,7 +76,7 @@ export default function Home() {
 
             <div className="absolute top-8 right-20">
             <Link href="/profile">
-              <div className="p-2 rounded-lg">
+              <div className="p-2 text-black rounded-lg">
                 <p>{user?.name}</p>
               </div>
             </Link>
