@@ -1,11 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import 'dotenv/config';
 
 export default function get_location() {
   const [location, setLocation] = useState(null);
   const [error, setError] = useState("");
   const [hospitals, setHospitals] = useState([]);
+
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -55,8 +59,10 @@ export default function get_location() {
 
   return (
     <div className="text-black bg-white">
-      <h2>Get Current Location</h2>
-      <button onClick={getLocation}>Find My Location</button>
+      <div className="flex flex-col">
+        <h2>Hospitals around you</h2>
+        <button onClick={getLocation}>Find My Location</button>
+      </div>
       {location && <p>Latitude: {location.lat}, Longitude: {location.lng}</p>}
       {error && <p>Error: {error}</p>}
 
@@ -70,7 +76,7 @@ export default function get_location() {
               <p>Address: {hospital.address}</p>
               <p>Rating: {hospital.rating}</p>
                 <p>Phone: {hospital.phone}</p>
-                <p>Website: {hospital.website}</p>
+                console.log(heartData.points);          <p>Website: {hospital.website}</p>
             </li>
           ))}
         </ul>  
