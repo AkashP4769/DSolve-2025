@@ -39,6 +39,8 @@ export default function get_location() {
           address: hospital.vicinity,
           rating: hospital.rating || "No rating",
           location: hospital.location,
+          phone: hospital.phone || "No phone number",
+          website: hospital.website || "No website",
         }));
       } else {
         console.log("No hospitals found.");
@@ -67,6 +69,8 @@ export default function get_location() {
               <h3>{hospital.name}</h3>
               <p>Address: {hospital.address}</p>
               <p>Rating: {hospital.rating}</p>
+                <p>Phone: {hospital.phone}</p>
+                <p>Website: {hospital.website}</p>
             </li>
           ))}
         </ul>  
