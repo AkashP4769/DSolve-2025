@@ -24,56 +24,68 @@ export default function Home() {
 
       useEffect(() => {
         const interval = setInterval(() => {
-          const newPoint = {
-            x: heartData[0].points.length + 1,
-            y: Math.floor(Math.random() * (120 - 60) + 60),
-            
-          };
-        
-          const newOxygenPoint = {
-            x: oxygenData[0].points.length + 1,
-            y: Math.floor(Math.random() * (100 - 90) + 90),
-          };
-          
-          setheartData((prevData) => [{
-            color: "steelblue",
-            points: [...prevData[0].points.slice(-10), newPoint],
-          }]);
-
-          setoxygenData((prevData) => [{
-            color: "steelblue",
-            points: [...prevData[0].points.slice(-10), newOxygenPoint],
-          }]);
+          setheartData((prevData) => {
+            const newPoint = {
+              x: prevData[0].points.length + 1, // Increment X correctly
+              y: Math.floor(Math.random() * (120 - 60) + 60),
+            };
+      
+            return [{
+              color: "steelblue",
+              points: [...prevData[0].points, newPoint], // Keep last 10 points
+            }];
+          });
+      
+          setoxygenData((prevData) => {
+            const newOxygenPoint = {
+              x: prevData[0].points.length + 1, // Ensure X stays sequential
+              y: Math.floor(Math.random() * (100 - 90) + 90),
+            };
+      
+            return [{
+              color: "steelblue",
+              points: [...prevData[0].points, newOxygenPoint], // Keep last 10 points
+            }];
+          });
         }, 1000);
-    
+      
         return () => clearInterval(interval);
-      }, [heartData]);
+      }, []);
 
       console.log(user?.name);
+      
+  console.log(heartData.points);
   return (
-    <div className='flex flex-col h-[100vh]'>
-        <div className='mt-[8vh] h-[92vh] rounded-t-xl justify-center items-center'>
+    
+    <div className='flex flex-col h-[100vh] text-black'>
+        <div className='mt-[8vh] h-[92vh] flex flex-col rounded-t-xl justify-center items-center'>
             <h2 className='text-black'>Real-Time Health Monitoring</h2>
             <h1 className='text-black'>My First LineChart</h1>
-            <div className='flex justify-center items-center'>
-                <div>
-                    <label className='text-black'>HeartRate</label>
+            <div className='flex flex-col sm:flex-row justify-center items-center'>
+                <div className='flex flex-col justify-center items-center'>
                     <LineChart id="heartRate" 
                         width={300}
-                        height={150}
+                        height={300}
                         data={heartData}
                     />
+                    <label className='text-black font-bold'>HeartRate</label>
                 </div>
-                <div>
-                    <label className='text-black'>Oxygen Level</label>
+                <div className='flex flex-col justify-center items-center'>
                     <LineChart 
                         id="oxygenLevel"
                         width={300}
-                        height={150}
+                        height={300}
                         data={oxygenData}
                     />
+                    <label className='text-black font-bold'>Oxygen Level</label>
                 </div>
+                
             </div>
+            <div className='flex flex-col justify-center items-center'>
+              <p className=' font-semibold'>Your Health Status</p>
+              <p>{oxygenData[0].points["y"] < 150 ? "Low blood pressure" : "Normal"}</p>
+            </div>
+
 
             <div className="absolute top-8 right-20">
             <Link href="/profile">
