@@ -20,7 +20,8 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col bg-cyan-800 p-6 rounded-lg w-96 h-100 justify-center">
+    <div className="flex flex-col shadow-purple-600 shadow-2xl bg-fuchsia-900 p-6 rounded-lg w-96
+     h-100 justify-center">
       <h1 className="text-white text-center">Login</h1>
       <label className="text-white">Email:</label>
       <input
